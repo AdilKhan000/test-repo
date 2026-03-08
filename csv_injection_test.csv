@@ -1,0 +1,4 @@
+Co Code File #,Employee Last Name,Employee First Name,Address Line 1,Address Line 2,City,State Post,Zip Code,Home Phone,Business Phone,Business Phone 2,Mobile Phone,Personal Phone,Business Email,Hire Date,Employee ID,Rate 1 Amount,Primary Rate,Standard Hours,Home Department,Home Cost Center
+16620246,=10+20,=LEN("TestString"),1 Apple Park Way,,Cupertino,CA,95014,,,,,,, 1/10/2023,,12,A,40,,
+16620247,-10+20,+10+10,1 Apple Park Way,,Cupertino,CA,95014,,,,,,, 1/10/2023,,12,A,40,,
+16620248,@SUM(1+2),=TODAY(),1 Apple Park Way,,Cupertino,CA,95014,,,,,,,1/10/2023,,12,A,40,,

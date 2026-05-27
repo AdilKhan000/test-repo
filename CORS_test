@@ -9,3 +9,11 @@ fetch("https://login.streamline.staging.ehc.adp.com/DataHubConfiguration/api/con
 })
 .then(data => console.log("Response Data:", data))
 .catch(err => console.log("BLOCKED:", err));
+
+
+
+Test 2: 
+GET /DataHubConfiguration/api/connectors/ec/11620/targetrecords HTTP/1.1
+Host: login.streamline.staging.ehc.adp.com
+Origin: https://evil.com
+Cookie: [your session]

@@ -17,3 +17,54 @@ Enforce Immutable Fields Server-Side: Any data field that is disabled or marked 
 
 Reject Unauthorized Modifications: Configure the API endpoint to actively validate the incoming payload against the allowed schema. If the server detects an attempt to submit a parameter that the user is not authorized to alter, it should reject the entire request and return a 400 Bad Request or 403 Forbidden error, rather than silently processing the rest of the data.
 HTML injection allows an attacker to manipulate the visual presentation and structure of the web application. By injecting unauthorized HTML tags, an attacker can deface the webpage or insert deceptive elements—such as malicious links or fake login forms—to conduct phishing attacks and deceive victims into revealing sensitive credentials.
+
+
+
+More
+1. ASP.NET / .NET Framework Banner
+When we looked at the application stack trace earlier, the server identified itself as:
+
+ASP.NET Version: 4.8.4797.0
+
+CLR Engine: 4.0.30319
+
+The Exact CVEs:
+This specific 4.8.4797.0 build is tied directly to Microsoft's April 14, 2026, Security and Quality Rollup (KB5082403). The vulnerabilities officially addressed in this specific build track are:
+
+CVE-2026-32178: .NET Framework Remote Code Execution Vulnerability
+
+CVE-2026-32203: .NET Framework Denial of Service Vulnerability
+
+CVE-2026-32226: .NET Framework Denial of Service Vulnerability
+
+CVE-2026-23666: .NET Framework Denial of Service Vulnerability
+
+CVE-2026-26171: .NET Framework Security Feature Bypass Vulnerability
+
+CVE-2026-33116: .NET Framework Information Disclosure Vulnerability
+
+(Pentester Note: Because 4.8.4797.0 is the patched file version from the April 2026 update, it means the server is protected against these specific CVEs. However, since your testing is happening in June 2026, you can note that they are likely missing the May and June security rollups).
+
+2. Microsoft SQL Server 2022 Banner
+When you used the SQLMap API, the backend dumped this specific banner:
+
+Version: 16.0.4250.1
+
+The Exact CVEs:
+This build number maps explicitly to the SQL Server 2022 CU24 GDR update (Released April 14, 2026 - KB5083252). The security advisories and CVEs tied to this specific framework build are:
+
+CVE-2026-32167: SQL Server Elevation of Privilege Vulnerability
+
+CVE-2026-32176: SQL Server Elevation of Privilege Vulnerability (Specifically: Improper neutralization of special elements in SQL commands / SQL Injection). ---
+
+3. Microsoft SQL Server 2019 Banner
+When you were doing manual error-based injection, the stack trace error message returned this banner:
+
+Version: 15.0.4312.2
+
+The Exact CVEs:
+This build number corresponds exactly to SQL Server 2019 Cumulative Update 20 (CU20 - KB5024276). The CVEs tied to the security fixes in this specific build are:
+
+CVE-2015-6420: Deserialization Vulnerability (Tied to bundled Java components)
+
+CVE-2017-15708: Apache Synapse Vulnerability (Tied to bundled Java components)

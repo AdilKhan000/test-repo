@@ -1,9 +1,5 @@
-It is recommended to implement the following:
+It is recommended to:
 
-Disable detailed error messages and stack traces in production environments. Configure custom error pages that return generic error messages without exposing internal framework details, file paths, or version information.
-In ASP.NET, set <customErrors mode="On"/> and <httpRuntime enableVersionHeader="false"/> in the web.config to suppress version disclosure and detailed error responses.
-Upgrade the third-party software to their latest stable versions to remediate known vulnerabilities associated with the disclosed versions.
-Configure the reverse proxy or Web Application Firewall to strip server-side headers such as Server, X-Powered-By, and X-AspNet-Version before sending responses over the network.
-
-<customErrors mode="On"/>
-<httpRuntime enableVersionHeader="false"/>
+Implement CSRF protection tokens for the logout endpoint to ensure the request originates from the legitimate site. The token must be randomly generated, sufficiently long (minimum 128 bits), unique per session, and validated server-side on every state-changing request.
+Change the logout method from GET to POST to prevent drive-by CSRF attacks via simple URL links or image tags.
+Apply CSRF protection across all state-changing functionality within the application, not limited to the logout endpoint."

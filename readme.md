@@ -1,12 +1,12 @@
-Impact (Improved)
+Abstract just needs the first line changed to:
 
-"An attacker can forcefully log out an authenticated user without their consent by tricking them into clicking a crafted CSRF link. While this does not directly expose sensitive data, it disrupts the user's session and can be chained with other attacks such as session fixation to gain unauthorized access immediately after the victim re-authenticates."
+"The test team observed that session cookies do not have the SameSite attribute set, making them susceptible to cross-site request forgery attacks."
+
+Impact (Revised)
+
+"An attacker can perform cross-site request forgery attacks as the session cookies lack the SameSite attribute. Without this flag, the browser will include cookies in cross-origin requests, allowing a malicious third-party site to make authenticated requests on behalf of the logged-in user without their consent."
 
 
-Recommendation (Improved)
+Recommendation (Revised)
 
-"It is recommended to:
-
-Implement CSRF protection tokens for the logout endpoint to ensure the request originates from the legitimate site. The token must be randomly generated, sufficiently long (minimum 128 bits), unique per session, and validated server-side on every state-changing request.
-Change the logout method from GET to POST to prevent drive-by CSRF attacks via simple URL links or image tags.
-Apply CSRF protection across all state-changing functionality within the application, not limited to the logout endpoint."
+"It is recommended to set the SameSite=Strict or SameSite=Lax attribute on all session cookies. This instructs the browser to only include cookies in requests originating from the same site, preventing cross-origin requests from carrying session credentials."

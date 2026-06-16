@@ -1,25 +1,19 @@
-import pyodbc
+import pymssql
 
 try:
-    conn = pyodbc.connect(
-        'DRIVER={ODBC Driver 17 for SQL Server};'
-        'SERVER=IP;'
-        'DATABASE=DATABASE;'
-        'UID=UID;'
-        'PWD='
-        'Connect Timeout=10'
+    conn = pymssql.connect(
+        server='',
+        port=,
+        user='',
+        password='',
+        database=''
     )
-    print("[+] Connected successfully")
+    cursor = conn.cursor()
+    cursor.execute("SELECT @@VERSION")
+    row = cursor.fetchone()
+    print(f"[+] Connected Successfully!")
+    print(f"[+] Server Version: {row[0]}")
     conn.close()
 
-except pyodbc.OperationalError as e:
-    print(f"[-] Connection failed - Server unreachable or port closed: {e}")
-
-except pyodbc.InterfaceError as e:
-    print(f"[-] Driver error: {e}")
-
-except pyodbc.ProgrammingError as e:
-    print(f"[-] Authentication failed or database not found: {e}")
-
 except Exception as e:
-    print(f"[-] Unexpected error: {e}")
+    print(f"[-] Failed: {e}")

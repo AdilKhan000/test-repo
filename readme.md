@@ -1,3 +1,6 @@
-It is recommended to disable all CBC-mode cipher suites on the server. Only the following strong cipher suites should be supported:
-TLS_AES_128_GCM_SHA256, TLS_AES_256_GCM_SHA384, TLS_CHACHA20_POLY1305_SHA256, TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256, TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384
-TLS 1.3 should be enforced where possible, as it exclusively uses AEAD ciphers and eliminates CBC-mode entirely
+It is recommended to implement the following:
+
+Disable detailed error messages and stack traces in production environments. Configure custom error pages that return generic error messages without exposing internal framework details, file paths, or version information.
+In ASP.NET, set <customErrors mode="On"/> and <httpRuntime enableVersionHeader="false"/> in the web.config to suppress version disclosure and detailed error responses.
+Upgrade the third-party software to their latest stable versions to remediate known vulnerabilities associated with the disclosed versions.
+Configure the reverse proxy or Web Application Firewall to strip server-side headers such as Server, X-Powered-By, and X-AspNet-Version before sending responses over the network.

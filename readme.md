@@ -1,27 +1,24 @@
-CVE-2026-41284, CVE-2026-43515, CVE-2026-43512, CVE-2026-43514, CVE-2026-43513, CVE-2026-42498
-
-
-Unencrypted Communications (HTTP)
-CVSS 3.1 Score: 4.3
-CVSS Vector: CVSS:3.1/AV:A/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N
-Severity: Medium
-Classification: A02: Cryptographic failures
+Session Management - Missing HttpOnly Flag
+CVSS 3.1 Score: 3.1
+CVSS Vector: CVSS:3.1/AV:N/AC:H/PR:N/UI:R/S:U/C:L/I:N/A:N
+Severity: Low
+Status: Open
+Classification: A05: Security Misconfiguration
 
 Abstract
-During the assessment, it was observed that the application does not enforce Transport Layer Security (TLS). The web server allows communication over unencrypted HTTP, completely lacking encryption in transit.
+The test team observed that the application issues cookies without the HttpOnly attribute set. This configuration makes the cookies accessible to client-side scripts, leaving them susceptible to theft through Cross-Site Scripting (XSS) attacks.
 
-In this scenario, the test team observed that the application dstiatvip.whc transmits all data in cleartext. As shown by the browser's "Not secure" warning, no SSL/TLS certificate is configured, leaving the connection entirely unprotected.
+In the current scenario, during the retest, the test team observed that the vulnerability remains open. The application still sets the .DSS.Xsrf.Client and XSRF-TOKEN cookies without the HttpOnly flag.
 
 Impact
-If an attacker establishes a Man-in-the-Middle (MitM) position on the internal network, they can easily intercept, read, and modify the cleartext traffic. This allows the attacker to directly capture sensitive data, including session cookies and internal application data, without needing to bypass any encryption mechanisms.
+If an attacker successfully exploits an XSS vulnerability on the application, they can use malicious JavaScript to read the contents of the cookies. This allows the attacker to steal session identifiers or security tokens, which can be used to hijack the user's session or bypass anti-CSRF protections.
 
 Affected Items
-http://dstiatvip.whc/admin/#/implementations
+Cookies:
+
+.DSS.Xsrf.Client
+
+XSRF-TOKEN
 
 Recommendation
-
-Install a valid SSL/TLS certificate on the web server.
-
-Enforce HTTPS across the entire application by configuring the server to automatically redirect all incoming HTTP requests to HTTPS (e.g., using a 301 redirect).
-
-Implement HTTP Strict Transport Security (HSTS) headers to instruct browsers to exclusively interact with the application over secure connections.
+It is recommended to set the HttpOnly attribute on all sensitive session and security cookies. This instructs the browser to deny client-side scripts (like JavaScript) access to the cookie, effectively preventing attackers from stealing it via XSS vulnerabilities.
